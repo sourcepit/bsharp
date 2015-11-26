@@ -214,7 +214,7 @@ classBodyDeclaration
     : classMemberDeclaration
     | instanceInitializer
     | staticInitializer
-    | constructorDeclaration
+    | constructorDeclaration [true]
     ;
 
 classMemberDeclaration
@@ -367,8 +367,8 @@ staticInitializer
     : 'static' block
     ;
 
-constructorDeclaration
-    : constructorModifier* constructorDeclarator throws_? constructorBody
+constructorDeclaration [boolean allowPrimary]
+    : constructorModifier* constructorDeclarator throws_? constructorBody [allowPrimary]
     ;
 
 constructorModifier
@@ -386,15 +386,15 @@ simpleTypeName
     : Identifier
     ;
 
-constructorBody
-    : '{' explicitConstructorInvocation? blockStatements? '}'
+constructorBody [boolean allowPrimary]
+    : '{' explicitConstructorInvocation [allowPrimary]? blockStatements? '}'
     ;
 
-explicitConstructorInvocation
+explicitConstructorInvocation [boolean allowPrimary]
     : typeArguments? 'this' '(' argumentList? ')' ';'
     | typeArguments? 'super' '(' argumentList? ')' ';'
     | expressionName '.' typeArguments? 'super' '(' argumentList? ')' ';'
-    | primary '.' typeArguments? 'super' '(' argumentList? ')' ';'
+    | {allowPrimary}? primary '.' typeArguments? 'super' '(' argumentList? ')' ';'
     ;
 
 enumDeclaration
@@ -620,10 +620,10 @@ statementExpression
     : assignment
     | preIncrementExpression
     | preDecrementExpression
-    | postIncrementExpression
-    | postDecrementExpression
-    | methodInvocation
-    | classInstanceCreationExpression
+    | postIncrementExpression[true]
+    | postDecrementExpression[true]
+    | methodInvocation [true]
+    | classInstanceCreationExpression [true]
     ;
 
 preIncrementExpression
@@ -632,14 +632,6 @@ preIncrementExpression
 
 preDecrementExpression
     : '--' unaryExpression
-    ;
-
-postIncrementExpression
-    : postfixExpression '++'
-    ;
-
-postDecrementExpression
-    : postfixExpression '--'
     ;
 
 ifThenStatement
@@ -799,48 +791,29 @@ resource
     ;
 
 primary
-    : primaryPrefixExpression primarySuffixExpression*
-    ;
-
-primaryNoNewArray
-    : primaryPrefixExpressionNoNewArray primarySuffixExpressionNoNewArray*
-    ;
-
-primarySuffixExpression
-    : '.' objectCreationExpression
-    | methodCallExpressionWithTypeArgs
-    | fieldAccessExpression
-    | methodReferenceExpression
-    ;
-
-primarySuffixExpressionNoNewArray
-    : primarySuffixExpression
-    | '[' expression ']'
-    ;
-
-primaryPrefixExpression
-    : primaryPrefixExpressionNoNewArray
+    : primaryNoNewArray [false]
     | arrayCreationExpression
     ;
 
-primaryPrefixExpressionNoNewArray
-    : literal
-    | typeName ( '[' ']' )? '.' 'class'
-    | 'void' '.' 'class'
-    | 'this'
+primaryNoNewArray [boolean allowPrimary]
+    :
+    | literal
+    | classLiteral 'this'
     | typeName '.' 'this'
     | '(' expression ')'
-    | objectCreationExpression
-    | typeName methodCallExpressionWithTypeArgs
-    | 'super' ( fieldAccessExpression | methodCallExpressionWithTypeArgs | methodReferenceExpression )
-    | typeName '.' 'super' ( fieldAccessExpression | methodCallExpressionWithTypeArgs | methodReferenceExpression )
-    // TODO: Test if type name is used before expressionName, when (fieldAccessExpression | methodCallExpressionWithTypeArgs | methodReferenceExpression) will match
-    // maybe we can remove fieldAccessExpression | methodCallExpressionWithTypeArgs | methodReferenceExpression from case below
-    | expressionName ( '.' objectCreationExpression | '[' expression ']' | methodCallExpressionWithTypeArgs | fieldAccessExpression | methodReferenceExpression )
-    | methodCallExpression
-    | referenceType methodReferenceExpression
-    | classType constructorReferenceExpressionWithTypeArgs
-    | arrayType constructorReferenceExpressionNoTypeArgs
+    | classInstanceCreationExpression [allowPrimary]
+    | fieldAccess [allowPrimary]
+    | arrayAccess [allowPrimary]
+    | methodInvocation [allowPrimary]
+    | methodReference [allowPrimary]
+    ;
+
+classLiteral
+    :
+    | typeName ( '[' ']' )* '.' 'class'
+    | numericType ( '[' ']' )* '.' 'class'
+    | 'boolean' ( '[' ']' )* '.' 'class'
+    | 'void' '.' 'class'
     ;
 
 objectCreationExpression
@@ -880,10 +853,20 @@ argumentList
     : expression ( ',' expression )*
     ;
 
-classInstanceCreationExpression
+classInstanceCreationExpression [boolean allowPrimary]
     : objectCreationExpression
     | expressionName '.' objectCreationExpression
-    | primary '.' objectCreationExpression
+    | {allowPrimary}? primary '.' objectCreationExpression
+    ;
+
+methodReference [boolean allowPrimary]
+    : expressionName '::' typeArguments? Identifier
+    | referenceType '::' typeArguments? Identifier
+    | {allowPrimary}? primary '::' typeArguments? Identifier
+    | 'super' '::' typeArguments? Identifier
+    | typeName '.' 'super' '::' typeArguments? Identifier
+    | classType '::' typeArguments? 'new'
+    | arrayType '::' 'new'
     ;
 
 arrayCreationExpression
@@ -940,8 +923,8 @@ assignment
 
 leftHandSide
     : expressionName
-    | fieldAccess
-    | arrayAccess
+    | fieldAccess [true]
+    | arrayAccess [true]
     ;
 
 assignmentOperator
@@ -1029,45 +1012,53 @@ unaryExpression
     | '--' unaryExpression
     | '+' unaryExpression
     | '-' unaryExpression
-    | unaryExpressionNotPlusMinus
+    | unaryExpressionNotPlusMinus[true]
     ;
 
-unaryExpressionNotPlusMinus
-    : postfixExpression
+unaryExpressionNotPlusMinus [boolean allowPrimary]
+    : postfixExpression [allowPrimary]
     | '~' unaryExpression
     | '!' unaryExpression
     | castExpression
     ;
 
-postfixExpression
-    : primary
+postfixExpression [boolean allowPrimary, boolean recursiveAttemt]
+    : {allowPrimary}? primary
     | expressionName
-    | postfixExpression '++'
-    | postfixExpression '--'
+    | {!recursiveAttemt}? postIncrementExpression[false]
+    | {!recursiveAttemt}? postDecrementExpression[false]
+    ;
+
+postIncrementExpression[boolean allowPrimary]
+    : postfixExpression[allowPrimary] '++'
+    ;
+
+postDecrementExpression[boolean allowPrimary]
+    : postfixExpression[allowPrimary] '--'
     ;
 
 castExpression
     : '(' primitiveType ')' unaryExpression
-    | '(' referenceType additionalBound* ')' unaryExpressionNotPlusMinus
+    | '(' referenceType additionalBound* ')' unaryExpressionNotPlusMinus[true]
     | '(' referenceType additionalBound* ')' lambdaExpression
     ;
 
-fieldAccess
-    : primary. Identifier
-    | 'super'. Identifier
+fieldAccess [boolean allowPrimary]
+    : {allowPrimary}? primary '.' Identifier
+    | 'super' '.' Identifier
     | 'TypeName' '.' 'super' '.' Identifier
     ;
 
-arrayAccess
+arrayAccess [boolean allowPrimary]
     : expressionName '[' expression ']'
-    | primaryNoNewArray '[' expression ']'
+    | primaryNoNewArray [allowPrimary] '[' expression ']'
     ;
 
-methodInvocation
+methodInvocation [boolean allowPrimary]
     : methodCallExpression
     | typeName methodCallExpressionWithTypeArgs
     | expressionName methodCallExpressionWithTypeArgs
-    | primary methodCallExpressionWithTypeArgs
+    | {allowPrimary}? primary methodCallExpressionWithTypeArgs
     | 'super' methodCallExpressionWithTypeArgs
     | typeName '.' 'super' methodCallExpressionWithTypeArgs
     ;
