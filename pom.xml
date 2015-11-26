@@ -29,6 +29,12 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
 					<version>1.0.0</version>
