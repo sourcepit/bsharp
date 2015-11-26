@@ -4,6 +4,17 @@
 	<target name="default" depends="download-antlr">
 		<java classname="org.antlr.v4.Tool" fork="true" failonerror="true" maxmemory="500m">
 			<arg value="-o" />
+			<arg value="src/gen/java/org/sourcepit/lr" />
+			<arg value="-listener" />
+			<arg value="-visitor" />
+			<arg value="-Werror" />
+			<arg value="LeftRecursion.g4" />
+			<classpath>
+				<pathelement location=".antlr/antlr-4.5.1-complete.jar" />
+			</classpath>
+		</java>
+		<java classname="org.antlr.v4.Tool" fork="true" failonerror="true" maxmemory="500m">
+			<arg value="-o" />
 			<arg value="src/gen/java/org/sourcepit/bsharp" />
 			<arg value="-listener" />
 			<arg value="-visitor" />
