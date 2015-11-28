@@ -27,7 +27,7 @@ primaryNoNewArray
 classInstanceCreationExpression
     : 'new' typeArguments? /* annotation* */ Identifier typeArgumentsOrDiamond? '(' argumentList? ')' /* classBody? */
     | expressionName '.' 'new' typeArguments? /* annotation* */ Identifier typeArgumentsOrDiamond? '(' argumentList? ')' /* classBody? */
-      // | primary '.' 'new' typeArguments? /* annotation* */ Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+    | primary '.' 'new' typeArguments? /* annotation* */ Identifier typeArgumentsOrDiamond? '(' argumentList? ')' /* classBody? */
     ;
 
 typeArgumentsOrDiamond
@@ -36,22 +36,21 @@ typeArgumentsOrDiamond
     ;
 
 fieldAccess
-    : // primary '.' Identifier
-      // |
-      'super' '.' Identifier
+    : primary '.' Identifier
+    | 'super' '.' Identifier
     | typeName '.' 'super' '.' Identifier
     ;
 
 arrayAccess
     : expressionName '[' expression ']'
-      // | primaryNoNewArray '[' expression ']'
+    | primaryNoNewArray '[' expression ']'
     ;
 
 methodInvocation
     : methodName '(' argumentList? ')'
     | typeName '.' typeArguments? Identifier '(' argumentList? ')'
     | expressionName '.' typeArguments? Identifier '(' argumentList? ')'
-    // | primary '.' typeArguments? Identifier '(' argumentList? ')'
+    | primary '.' typeArguments? Identifier '(' argumentList? ')'
     | 'super' '.' typeArguments? Identifier '(' argumentList? ')'
     | typeName '.' 'super' '.' typeArguments? Identifier '(' argumentList? ')'
     ;
@@ -63,7 +62,7 @@ argumentList
 methodReference
     : expressionName '::' typeArguments? Identifier
     | referenceType '::' typeArguments? Identifier
-    // | primary '::' typeArguments? Identifier
+    | primary '::' typeArguments? Identifier
     | 'super' '::' typeArguments? Identifier
     | typeName '.' 'super' '::' typeArguments? Identifier
     | classType '::' typeArguments? 'new'
