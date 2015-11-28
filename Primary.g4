@@ -129,17 +129,16 @@ referenceType
     ;
 
 classOrInterfaceType
-    : classType
-    | interfaceType
-    ;
-
-classType
     : /* annotation* */ Identifier typeArguments?
     | classOrInterfaceType '.' /* annotation* */ Identifier typeArguments?
     ;
 
+classType
+    : classOrInterfaceType
+    ;
+
 interfaceType
-    : classType
+    : classOrInterfaceType
     ;
 
 typeVariable
