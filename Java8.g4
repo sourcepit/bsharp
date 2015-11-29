@@ -283,17 +283,16 @@ unannReferenceType
     ;
 
 unannClassOrInterfaceType
-    : unannClassType
-    | unannInterfaceType
-    ;
-
-unannClassType
     : Identifier typeArguments?
     | unannClassOrInterfaceType '.' annotation* Identifier typeArguments?
     ;
 
+unannClassType
+    : unannClassOrInterfaceType
+    ;
+
 unannInterfaceType
-    : unannClassType
+    : unannClassOrInterfaceType
     ;
 
 unannTypeVariable
