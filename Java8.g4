@@ -819,7 +819,7 @@ primaryNoNewArray
 classInstanceCreationExpression
     : 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
     | expressionName '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
-    | primary '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+      // | primary '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
     ;
 
 typeArgumentsOrDiamond
@@ -828,7 +828,7 @@ typeArgumentsOrDiamond
     ;
 
 fieldAccess
-    : primary '.' Identifier
+    :// primary '.' Identifier
     | 'super' '.' Identifier
     | typeName '.' 'super' '.' Identifier
     ;
