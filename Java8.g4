@@ -81,16 +81,16 @@ referenceType
     ;
 
 classOrInterfaceType
-    : classType
-    | interfaceType
+    : annotation* Identifier typeArguments?
+    | classOrInterfaceType '.' annotation* Identifier typeArguments?
     ;
 
 classType
-    : annotation* Identifier typeArguments? ( '.' annotation* Identifier typeArguments? )*
+    : classOrInterfaceType
     ;
 
 interfaceType
-    : classType
+    : classOrInterfaceType
     ;
 
 typeVariable
