@@ -1,4 +1,19 @@
-grammar BSharp;
+/*
+ * Copyright 2014 Bernd Vogt and others.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+grammar Java8;
 
 @header {
 package org.sourcepit.java8;
@@ -273,7 +288,8 @@ unannClassOrInterfaceType
     ;
 
 unannClassType
-    : Identifier typeArguments? ( '.' annotation* Identifier typeArguments? )*
+    : Identifier typeArguments?
+    | unannClassOrInterfaceType '.' annotation* Identifier typeArguments?
     ;
 
 unannInterfaceType
@@ -626,22 +642,6 @@ statementExpression
     | classInstanceCreationExpression
     ;
 
-preIncrementExpression
-    : '++' unaryExpression
-    ;
-
-preDecrementExpression
-    : '--' unaryExpression
-    ;
-
-postIncrementExpression
-    : postfixExpression '++'
-    ;
-
-postDecrementExpression
-    : postfixExpression '--'
-    ;
-
 ifThenStatement
     : 'if' '(' expression ')' statement
     ;
@@ -799,76 +799,28 @@ resource
     ;
 
 primary
-    : primaryPrefixExpression primarySuffixExpression*
-    ;
-
-primaryNoNewArray
-    : primaryPrefixExpressionNoNewArray primarySuffixExpressionNoNewArray*
-    ;
-
-primarySuffixExpression
-    : '.' objectCreationExpression
-    | methodCallExpressionWithTypeArgs
-    | fieldAccessExpression
-    | methodReferenceExpression
-    ;
-
-primarySuffixExpressionNoNewArray
-    : primarySuffixExpression
-    | '[' expression ']'
-    ;
-
-primaryPrefixExpression
-    : primaryPrefixExpressionNoNewArray
+    : primaryNoNewArray
     | arrayCreationExpression
     ;
 
-primaryPrefixExpressionNoNewArray
+primaryNoNewArray
     : literal
     | typeName ( '[' ']' )? '.' 'class'
     | 'void' '.' 'class'
     | 'this'
     | typeName '.' 'this'
     | '(' expression ')'
-    | objectCreationExpression
-    | typeName methodCallExpressionWithTypeArgs
-    | 'super' ( fieldAccessExpression | methodCallExpressionWithTypeArgs | methodReferenceExpression )
-    | typeName '.' 'super' ( fieldAccessExpression | methodCallExpressionWithTypeArgs | methodReferenceExpression )
-    // TODO: Test if type name is used before expressionName, when (fieldAccessExpression | methodCallExpressionWithTypeArgs | methodReferenceExpression) will match
-    // maybe we can remove fieldAccessExpression | methodCallExpressionWithTypeArgs | methodReferenceExpression from case below
-    | expressionName ( '.' objectCreationExpression | '[' expression ']' | methodCallExpressionWithTypeArgs | fieldAccessExpression | methodReferenceExpression )
-    | methodCallExpression
-    | referenceType methodReferenceExpression
-    | classType constructorReferenceExpressionWithTypeArgs
-    | arrayType constructorReferenceExpressionNoTypeArgs
+    | classInstanceCreationExpression
+    | fieldAccess
+    | arrayAccess
+    | methodInvocation
+    | methodReference
     ;
 
-objectCreationExpression
+classInstanceCreationExpression
     : 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
-    ;
-
-fieldAccessExpression
-    : '.' Identifier
-    ;
-
-methodCallExpressionWithTypeArgs
-    : '.' typeArguments? methodCallExpression
-    ;
-
-methodCallExpression
-    : methodName '(' argumentList? ')'
-    ;
-
-methodReferenceExpression
-    : '::' typeArguments? Identifier
-    ;
-
-constructorReferenceExpressionWithTypeArgs
-    : '::' typeArguments? 'new'
-    ;
-
-constructorReferenceExpressionNoTypeArgs
-    : '::' 'new'
+    | expressionName '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+    | primary '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
     ;
 
 typeArgumentsOrDiamond
@@ -876,14 +828,38 @@ typeArgumentsOrDiamond
     | '<' '>'
     ;
 
+fieldAccess
+    : primary '.' Identifier
+    | 'super' '.' Identifier
+    | typeName '.' 'super' '.' Identifier
+    ;
+
+arrayAccess
+    : expressionName '[' expression ']'
+      // | primaryNoNewArray '[' expression ']'
+    ;
+
+methodInvocation
+    : methodName '(' argumentList? ')'
+    | typeName '.' typeArguments? methodName '(' argumentList? ')'
+    | expressionName '.' typeArguments? methodName '(' argumentList? ')'
+    // | primary '.' typeArguments? methodName '(' argumentList? ')'
+    | 'super' '.' typeArguments? methodName '(' argumentList? ')'
+    | typeName '.' 'super' '.' typeArguments? methodName '(' argumentList? ')'
+    ;
+
 argumentList
     : expression ( ',' expression )*
     ;
 
-classInstanceCreationExpression
-    : objectCreationExpression
-    | expressionName '.' objectCreationExpression
-    | primary '.' objectCreationExpression
+methodReference
+    : expressionName '::' typeArguments? Identifier
+    | referenceType '::' typeArguments? Identifier
+    // | primary '::' typeArguments? Identifier
+    | 'super' '::' typeArguments? Identifier
+    | typeName '.' 'super' '::' typeArguments? Identifier
+    | classType '::' typeArguments? 'new'
+    | arrayType '::' 'new'
     ;
 
 arrayCreationExpression
@@ -1025,11 +1001,19 @@ multiplicativeExpression
     ;
 
 unaryExpression
-    : '++' unaryExpression
-    | '--' unaryExpression
+    : preIncrementExpression
+    | preDecrementExpression
     | '+' unaryExpression
     | '-' unaryExpression
     | unaryExpressionNotPlusMinus
+    ;
+
+preIncrementExpression
+    : '++' unaryExpression
+    ;
+
+preDecrementExpression
+    : '--' unaryExpression
     ;
 
 unaryExpressionNotPlusMinus
@@ -1042,34 +1026,22 @@ unaryExpressionNotPlusMinus
 postfixExpression
     : primary
     | expressionName
-    | postfixExpression '++'
-    | postfixExpression '--'
+      // | postIncrementExpression
+      // | postDecrementExpression
+    ;
+
+postIncrementExpression
+    : postfixExpression '++'
+    ;
+
+postDecrementExpression
+    : postfixExpression '--'
     ;
 
 castExpression
     : '(' primitiveType ')' unaryExpression
     | '(' referenceType additionalBound* ')' unaryExpressionNotPlusMinus
     | '(' referenceType additionalBound* ')' lambdaExpression
-    ;
-
-fieldAccess
-    : primary. Identifier
-    | 'super'. Identifier
-    | 'TypeName' '.' 'super' '.' Identifier
-    ;
-
-arrayAccess
-    : expressionName '[' expression ']'
-    | primaryNoNewArray '[' expression ']'
-    ;
-
-methodInvocation
-    : methodCallExpression
-    | typeName methodCallExpressionWithTypeArgs
-    | expressionName methodCallExpressionWithTypeArgs
-    | primary methodCallExpressionWithTypeArgs
-    | 'super' methodCallExpressionWithTypeArgs
-    | typeName '.' 'super' methodCallExpressionWithTypeArgs
     ;
 
 literal
