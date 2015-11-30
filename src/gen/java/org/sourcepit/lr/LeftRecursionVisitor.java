@@ -9,19 +9,22 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * by {@link LeftRecursionParser}.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
- * operations with no return type.
+ *           operations with no return type.
  */
 public interface LeftRecursionVisitor<T> extends ParseTreeVisitor<T> {
-	/**
-	 * Visit a parse tree produced by {@link LeftRecursionParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStat(LeftRecursionParser.StatContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link LeftRecursionParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpr(LeftRecursionParser.ExprContext ctx);
+   /**
+    * Visit a parse tree produced by {@link LeftRecursionParser#stat}.
+    * 
+    * @param ctx the parse tree
+    * @return the visitor result
+    */
+   T visitStat(LeftRecursionParser.StatContext ctx);
+
+   /**
+    * Visit a parse tree produced by {@link LeftRecursionParser#expr}.
+    * 
+    * @param ctx the parse tree
+    * @return the visitor result
+    */
+   T visitExpr(LeftRecursionParser.ExprContext ctx);
 }

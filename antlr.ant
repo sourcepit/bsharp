@@ -4,22 +4,11 @@
 	<target name="default" depends="download-antlr">
 		<java classname="org.antlr.v4.Tool" fork="true" failonerror="true" maxmemory="500m">
 			<arg value="-o" />
-			<arg value="src/gen/java/org/sourcepit/expr" />
+			<arg value="src/gen/java/org/sourcepit/java8" />
 			<arg value="-listener" />
 			<arg value="-visitor" />
-			<arg value="-Werror" />
-			<arg value="Expr.g4" />
-			<classpath>
-				<pathelement location=".antlr/antlr-4.5.1-complete.jar" />
-			</classpath>
-		</java>
-		<java classname="org.antlr.v4.Tool" fork="true" failonerror="true" maxmemory="500m">
-			<arg value="-o" />
-			<arg value="src/gen/java/org/sourcepit/bsharp" />
-			<arg value="-listener" />
-			<arg value="-visitor" />
-			<arg value="-Werror" />
-			<arg value="BSharp.g4" />
+			<!--arg value="-Werror" /-->
+			<arg value="Java8.g4" />
 			<classpath>
 				<pathelement location=".antlr/antlr-4.5.1-complete.jar" />
 			</classpath>

@@ -1,6 +1,6 @@
-// Generated from Expr.g4 by ANTLR 4.5.1
+// Generated from Primary.g4 by ANTLR 4.5.1
 
-package org.sourcepit.expr;
+package org.sourcepit.primary;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -8,11 +8,11 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link ExprListener},
+ * This class provides an empty implementation of {@link PrimaryListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class ExprBaseListener implements ExprListener {
+public class PrimaryBaseListener implements PrimaryListener {
    /**
     * {@inheritDoc}
     *
@@ -21,7 +21,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterPackageName(ExprParser.PackageNameContext ctx) {
+   public void enterParenthesizedExpression(PrimaryParser.ParenthesizedExpressionContext ctx) {
    }
 
    /**
@@ -32,7 +32,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitPackageName(ExprParser.PackageNameContext ctx) {
+   public void exitParenthesizedExpression(PrimaryParser.ParenthesizedExpressionContext ctx) {
    }
 
    /**
@@ -43,7 +43,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterTypeName(ExprParser.TypeNameContext ctx) {
+   public void enterClassInstanceCreationExpression(PrimaryParser.ClassInstanceCreationExpressionContext ctx) {
    }
 
    /**
@@ -54,7 +54,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitTypeName(ExprParser.TypeNameContext ctx) {
+   public void exitClassInstanceCreationExpression(PrimaryParser.ClassInstanceCreationExpressionContext ctx) {
    }
 
    /**
@@ -65,7 +65,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterPackageOrTypeName(ExprParser.PackageOrTypeNameContext ctx) {
+   public void enterClassLiteral(PrimaryParser.ClassLiteralContext ctx) {
    }
 
    /**
@@ -76,7 +76,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitPackageOrTypeName(ExprParser.PackageOrTypeNameContext ctx) {
+   public void exitClassLiteral(PrimaryParser.ClassLiteralContext ctx) {
    }
 
    /**
@@ -87,7 +87,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterExpressionName(ExprParser.ExpressionNameContext ctx) {
+   public void enterArrayCreationExpression(PrimaryParser.ArrayCreationExpressionContext ctx) {
    }
 
    /**
@@ -98,7 +98,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitExpressionName(ExprParser.ExpressionNameContext ctx) {
+   public void exitArrayCreationExpression(PrimaryParser.ArrayCreationExpressionContext ctx) {
    }
 
    /**
@@ -109,7 +109,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterMethodName(ExprParser.MethodNameContext ctx) {
+   public void enterThisLiteral(PrimaryParser.ThisLiteralContext ctx) {
    }
 
    /**
@@ -120,7 +120,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitMethodName(ExprParser.MethodNameContext ctx) {
+   public void exitThisLiteral(PrimaryParser.ThisLiteralContext ctx) {
    }
 
    /**
@@ -131,7 +131,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterAmbiguousName(ExprParser.AmbiguousNameContext ctx) {
+   public void enterLexicalLiteral(PrimaryParser.LexicalLiteralContext ctx) {
    }
 
    /**
@@ -142,7 +142,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitAmbiguousName(ExprParser.AmbiguousNameContext ctx) {
+   public void exitLexicalLiteral(PrimaryParser.LexicalLiteralContext ctx) {
    }
 
    /**
@@ -153,7 +153,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterType(ExprParser.TypeContext ctx) {
+   public void enterTypeArgumentsOrDiamond(PrimaryParser.TypeArgumentsOrDiamondContext ctx) {
    }
 
    /**
@@ -164,7 +164,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitType(ExprParser.TypeContext ctx) {
+   public void exitTypeArgumentsOrDiamond(PrimaryParser.TypeArgumentsOrDiamondContext ctx) {
    }
 
    /**
@@ -175,7 +175,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterPrimitiveType(ExprParser.PrimitiveTypeContext ctx) {
+   public void enterFieldAccess(PrimaryParser.FieldAccessContext ctx) {
    }
 
    /**
@@ -186,7 +186,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitPrimitiveType(ExprParser.PrimitiveTypeContext ctx) {
+   public void exitFieldAccess(PrimaryParser.FieldAccessContext ctx) {
    }
 
    /**
@@ -197,7 +197,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterNumericType(ExprParser.NumericTypeContext ctx) {
+   public void enterArrayAccess(PrimaryParser.ArrayAccessContext ctx) {
    }
 
    /**
@@ -208,7 +208,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitNumericType(ExprParser.NumericTypeContext ctx) {
+   public void exitArrayAccess(PrimaryParser.ArrayAccessContext ctx) {
    }
 
    /**
@@ -219,7 +219,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterIntegralType(ExprParser.IntegralTypeContext ctx) {
+   public void enterMethodInvocation(PrimaryParser.MethodInvocationContext ctx) {
    }
 
    /**
@@ -230,7 +230,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitIntegralType(ExprParser.IntegralTypeContext ctx) {
+   public void exitMethodInvocation(PrimaryParser.MethodInvocationContext ctx) {
    }
 
    /**
@@ -241,7 +241,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterFloatingPointType(ExprParser.FloatingPointTypeContext ctx) {
+   public void enterArgumentList(PrimaryParser.ArgumentListContext ctx) {
    }
 
    /**
@@ -252,7 +252,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitFloatingPointType(ExprParser.FloatingPointTypeContext ctx) {
+   public void exitArgumentList(PrimaryParser.ArgumentListContext ctx) {
    }
 
    /**
@@ -263,7 +263,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterReferenceType(ExprParser.ReferenceTypeContext ctx) {
+   public void enterMethodReference(PrimaryParser.MethodReferenceContext ctx) {
    }
 
    /**
@@ -274,7 +274,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitReferenceType(ExprParser.ReferenceTypeContext ctx) {
+   public void exitMethodReference(PrimaryParser.MethodReferenceContext ctx) {
    }
 
    /**
@@ -285,7 +285,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterClassOrInterfaceType(ExprParser.ClassOrInterfaceTypeContext ctx) {
+   public void enterDimExprs(PrimaryParser.DimExprsContext ctx) {
    }
 
    /**
@@ -296,7 +296,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitClassOrInterfaceType(ExprParser.ClassOrInterfaceTypeContext ctx) {
+   public void exitDimExprs(PrimaryParser.DimExprsContext ctx) {
    }
 
    /**
@@ -307,7 +307,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterClassType(ExprParser.ClassTypeContext ctx) {
+   public void enterDimExpr(PrimaryParser.DimExprContext ctx) {
    }
 
    /**
@@ -318,7 +318,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitClassType(ExprParser.ClassTypeContext ctx) {
+   public void exitDimExpr(PrimaryParser.DimExprContext ctx) {
    }
 
    /**
@@ -329,7 +329,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterInterfaceType(ExprParser.InterfaceTypeContext ctx) {
+   public void enterConstantExpression(PrimaryParser.ConstantExpressionContext ctx) {
    }
 
    /**
@@ -340,7 +340,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitInterfaceType(ExprParser.InterfaceTypeContext ctx) {
+   public void exitConstantExpression(PrimaryParser.ConstantExpressionContext ctx) {
    }
 
    /**
@@ -351,7 +351,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterTypeVariable(ExprParser.TypeVariableContext ctx) {
+   public void enterExpression(PrimaryParser.ExpressionContext ctx) {
    }
 
    /**
@@ -362,7 +362,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitTypeVariable(ExprParser.TypeVariableContext ctx) {
+   public void exitExpression(PrimaryParser.ExpressionContext ctx) {
    }
 
    /**
@@ -373,7 +373,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterArrayType(ExprParser.ArrayTypeContext ctx) {
+   public void enterType(PrimaryParser.TypeContext ctx) {
    }
 
    /**
@@ -384,7 +384,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitArrayType(ExprParser.ArrayTypeContext ctx) {
+   public void exitType(PrimaryParser.TypeContext ctx) {
    }
 
    /**
@@ -395,7 +395,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterDims(ExprParser.DimsContext ctx) {
+   public void enterPrimitiveType(PrimaryParser.PrimitiveTypeContext ctx) {
    }
 
    /**
@@ -406,7 +406,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitDims(ExprParser.DimsContext ctx) {
+   public void exitPrimitiveType(PrimaryParser.PrimitiveTypeContext ctx) {
    }
 
    /**
@@ -417,7 +417,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterTypeParameter(ExprParser.TypeParameterContext ctx) {
+   public void enterNumericType(PrimaryParser.NumericTypeContext ctx) {
    }
 
    /**
@@ -428,7 +428,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitTypeParameter(ExprParser.TypeParameterContext ctx) {
+   public void exitNumericType(PrimaryParser.NumericTypeContext ctx) {
    }
 
    /**
@@ -439,7 +439,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterTypeBound(ExprParser.TypeBoundContext ctx) {
+   public void enterIntegralType(PrimaryParser.IntegralTypeContext ctx) {
    }
 
    /**
@@ -450,7 +450,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitTypeBound(ExprParser.TypeBoundContext ctx) {
+   public void exitIntegralType(PrimaryParser.IntegralTypeContext ctx) {
    }
 
    /**
@@ -461,7 +461,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterAdditionalBound(ExprParser.AdditionalBoundContext ctx) {
+   public void enterFloatingPointType(PrimaryParser.FloatingPointTypeContext ctx) {
    }
 
    /**
@@ -472,7 +472,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitAdditionalBound(ExprParser.AdditionalBoundContext ctx) {
+   public void exitFloatingPointType(PrimaryParser.FloatingPointTypeContext ctx) {
    }
 
    /**
@@ -483,7 +483,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterTypeArguments(ExprParser.TypeArgumentsContext ctx) {
+   public void enterReferenceType(PrimaryParser.ReferenceTypeContext ctx) {
    }
 
    /**
@@ -494,7 +494,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitTypeArguments(ExprParser.TypeArgumentsContext ctx) {
+   public void exitReferenceType(PrimaryParser.ReferenceTypeContext ctx) {
    }
 
    /**
@@ -505,7 +505,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterTypeArgumentList(ExprParser.TypeArgumentListContext ctx) {
+   public void enterClassOrInterfaceType(PrimaryParser.ClassOrInterfaceTypeContext ctx) {
    }
 
    /**
@@ -516,7 +516,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitTypeArgumentList(ExprParser.TypeArgumentListContext ctx) {
+   public void exitClassOrInterfaceType(PrimaryParser.ClassOrInterfaceTypeContext ctx) {
    }
 
    /**
@@ -527,7 +527,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterTypeArgument(ExprParser.TypeArgumentContext ctx) {
+   public void enterClassType(PrimaryParser.ClassTypeContext ctx) {
    }
 
    /**
@@ -538,7 +538,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitTypeArgument(ExprParser.TypeArgumentContext ctx) {
+   public void exitClassType(PrimaryParser.ClassTypeContext ctx) {
    }
 
    /**
@@ -549,7 +549,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterWildcard(ExprParser.WildcardContext ctx) {
+   public void enterInterfaceType(PrimaryParser.InterfaceTypeContext ctx) {
    }
 
    /**
@@ -560,7 +560,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitWildcard(ExprParser.WildcardContext ctx) {
+   public void exitInterfaceType(PrimaryParser.InterfaceTypeContext ctx) {
    }
 
    /**
@@ -571,7 +571,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterWildcardBounds(ExprParser.WildcardBoundsContext ctx) {
+   public void enterTypeVariable(PrimaryParser.TypeVariableContext ctx) {
    }
 
    /**
@@ -582,7 +582,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitWildcardBounds(ExprParser.WildcardBoundsContext ctx) {
+   public void exitTypeVariable(PrimaryParser.TypeVariableContext ctx) {
    }
 
    /**
@@ -593,7 +593,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterShiftExpression(ExprParser.ShiftExpressionContext ctx) {
+   public void enterArrayType(PrimaryParser.ArrayTypeContext ctx) {
    }
 
    /**
@@ -604,7 +604,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitShiftExpression(ExprParser.ShiftExpressionContext ctx) {
+   public void exitArrayType(PrimaryParser.ArrayTypeContext ctx) {
    }
 
    /**
@@ -615,7 +615,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterConditionalOrEexpression(ExprParser.ConditionalOrEexpressionContext ctx) {
+   public void enterDims(PrimaryParser.DimsContext ctx) {
    }
 
    /**
@@ -626,7 +626,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitConditionalOrEexpression(ExprParser.ConditionalOrEexpressionContext ctx) {
+   public void exitDims(PrimaryParser.DimsContext ctx) {
    }
 
    /**
@@ -637,7 +637,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterAdditiveExpression(ExprParser.AdditiveExpressionContext ctx) {
+   public void enterTypeParameter(PrimaryParser.TypeParameterContext ctx) {
    }
 
    /**
@@ -648,7 +648,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitAdditiveExpression(ExprParser.AdditiveExpressionContext ctx) {
+   public void exitTypeParameter(PrimaryParser.TypeParameterContext ctx) {
    }
 
    /**
@@ -659,7 +659,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterRelationalExpression(ExprParser.RelationalExpressionContext ctx) {
+   public void enterTypeBound(PrimaryParser.TypeBoundContext ctx) {
    }
 
    /**
@@ -670,7 +670,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitRelationalExpression(ExprParser.RelationalExpressionContext ctx) {
+   public void exitTypeBound(PrimaryParser.TypeBoundContext ctx) {
    }
 
    /**
@@ -681,7 +681,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterInclusiveOrExpression(ExprParser.InclusiveOrExpressionContext ctx) {
+   public void enterAdditionalBound(PrimaryParser.AdditionalBoundContext ctx) {
    }
 
    /**
@@ -692,7 +692,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitInclusiveOrExpression(ExprParser.InclusiveOrExpressionContext ctx) {
+   public void exitAdditionalBound(PrimaryParser.AdditionalBoundContext ctx) {
    }
 
    /**
@@ -703,7 +703,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterMultiplicativeExpression(ExprParser.MultiplicativeExpressionContext ctx) {
+   public void enterTypeArguments(PrimaryParser.TypeArgumentsContext ctx) {
    }
 
    /**
@@ -714,7 +714,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitMultiplicativeExpression(ExprParser.MultiplicativeExpressionContext ctx) {
+   public void exitTypeArguments(PrimaryParser.TypeArgumentsContext ctx) {
    }
 
    /**
@@ -725,7 +725,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterCastExpression(ExprParser.CastExpressionContext ctx) {
+   public void enterTypeArgumentList(PrimaryParser.TypeArgumentListContext ctx) {
    }
 
    /**
@@ -736,7 +736,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitCastExpression(ExprParser.CastExpressionContext ctx) {
+   public void exitTypeArgumentList(PrimaryParser.TypeArgumentListContext ctx) {
    }
 
    /**
@@ -747,7 +747,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterAndExpression(ExprParser.AndExpressionContext ctx) {
+   public void enterTypeArgument(PrimaryParser.TypeArgumentContext ctx) {
    }
 
    /**
@@ -758,7 +758,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitAndExpression(ExprParser.AndExpressionContext ctx) {
+   public void exitTypeArgument(PrimaryParser.TypeArgumentContext ctx) {
    }
 
    /**
@@ -769,7 +769,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterAssignmentEexpression(ExprParser.AssignmentEexpressionContext ctx) {
+   public void enterWildcard(PrimaryParser.WildcardContext ctx) {
    }
 
    /**
@@ -780,7 +780,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitAssignmentEexpression(ExprParser.AssignmentEexpressionContext ctx) {
+   public void exitWildcard(PrimaryParser.WildcardContext ctx) {
    }
 
    /**
@@ -791,7 +791,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterExclusiveOrExpression(ExprParser.ExclusiveOrExpressionContext ctx) {
+   public void enterWildcardBounds(PrimaryParser.WildcardBoundsContext ctx) {
    }
 
    /**
@@ -802,7 +802,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitExclusiveOrExpression(ExprParser.ExclusiveOrExpressionContext ctx) {
+   public void exitWildcardBounds(PrimaryParser.WildcardBoundsContext ctx) {
    }
 
    /**
@@ -813,7 +813,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterEqualityExpression(ExprParser.EqualityExpressionContext ctx) {
+   public void enterPackageName(PrimaryParser.PackageNameContext ctx) {
    }
 
    /**
@@ -824,7 +824,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitEqualityExpression(ExprParser.EqualityExpressionContext ctx) {
+   public void exitPackageName(PrimaryParser.PackageNameContext ctx) {
    }
 
    /**
@@ -835,7 +835,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterArrayAccess(ExprParser.ArrayAccessContext ctx) {
+   public void enterTypeName(PrimaryParser.TypeNameContext ctx) {
    }
 
    /**
@@ -846,7 +846,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitArrayAccess(ExprParser.ArrayAccessContext ctx) {
+   public void exitTypeName(PrimaryParser.TypeNameContext ctx) {
    }
 
    /**
@@ -857,7 +857,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterConditionalAndEexpression(ExprParser.ConditionalAndEexpressionContext ctx) {
+   public void enterPackageOrTypeName(PrimaryParser.PackageOrTypeNameContext ctx) {
    }
 
    /**
@@ -868,7 +868,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitConditionalAndEexpression(ExprParser.ConditionalAndEexpressionContext ctx) {
+   public void exitPackageOrTypeName(PrimaryParser.PackageOrTypeNameContext ctx) {
    }
 
    /**
@@ -879,7 +879,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterConditionalEexpression(ExprParser.ConditionalEexpressionContext ctx) {
+   public void enterExpressionName(PrimaryParser.ExpressionNameContext ctx) {
    }
 
    /**
@@ -890,7 +890,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitConditionalEexpression(ExprParser.ConditionalEexpressionContext ctx) {
+   public void exitExpressionName(PrimaryParser.ExpressionNameContext ctx) {
    }
 
    /**
@@ -901,7 +901,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterAssignmentOperator(ExprParser.AssignmentOperatorContext ctx) {
+   public void enterMethodName(PrimaryParser.MethodNameContext ctx) {
    }
 
    /**
@@ -912,7 +912,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitAssignmentOperator(ExprParser.AssignmentOperatorContext ctx) {
+   public void exitMethodName(PrimaryParser.MethodNameContext ctx) {
    }
 
    /**
@@ -923,7 +923,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterEqualityOperator(ExprParser.EqualityOperatorContext ctx) {
+   public void enterAmbiguousName(PrimaryParser.AmbiguousNameContext ctx) {
    }
 
    /**
@@ -934,7 +934,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitEqualityOperator(ExprParser.EqualityOperatorContext ctx) {
+   public void exitAmbiguousName(PrimaryParser.AmbiguousNameContext ctx) {
    }
 
    /**
@@ -945,7 +945,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void enterRelationalOperator(ExprParser.RelationalOperatorContext ctx) {
+   public void enterLiteral(PrimaryParser.LiteralContext ctx) {
    }
 
    /**
@@ -956,73 +956,7 @@ public class ExprBaseListener implements ExprListener {
     * </p>
     */
    @Override
-   public void exitRelationalOperator(ExprParser.RelationalOperatorContext ctx) {
-   }
-
-   /**
-    * {@inheritDoc}
-    *
-    * <p>
-    * The default implementation does nothing.
-    * </p>
-    */
-   @Override
-   public void enterShiftOperator(ExprParser.ShiftOperatorContext ctx) {
-   }
-
-   /**
-    * {@inheritDoc}
-    *
-    * <p>
-    * The default implementation does nothing.
-    * </p>
-    */
-   @Override
-   public void exitShiftOperator(ExprParser.ShiftOperatorContext ctx) {
-   }
-
-   /**
-    * {@inheritDoc}
-    *
-    * <p>
-    * The default implementation does nothing.
-    * </p>
-    */
-   @Override
-   public void enterAdditiveOperator(ExprParser.AdditiveOperatorContext ctx) {
-   }
-
-   /**
-    * {@inheritDoc}
-    *
-    * <p>
-    * The default implementation does nothing.
-    * </p>
-    */
-   @Override
-   public void exitAdditiveOperator(ExprParser.AdditiveOperatorContext ctx) {
-   }
-
-   /**
-    * {@inheritDoc}
-    *
-    * <p>
-    * The default implementation does nothing.
-    * </p>
-    */
-   @Override
-   public void enterMultiplicativeOperator(ExprParser.MultiplicativeOperatorContext ctx) {
-   }
-
-   /**
-    * {@inheritDoc}
-    *
-    * <p>
-    * The default implementation does nothing.
-    * </p>
-    */
-   @Override
-   public void exitMultiplicativeOperator(ExprParser.MultiplicativeOperatorContext ctx) {
+   public void exitLiteral(PrimaryParser.LiteralContext ctx) {
    }
 
    /**

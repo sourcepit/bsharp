@@ -797,25 +797,42 @@ resource
     : variableModifier* unannType variableDeclaratorId '=' expression
     ;
 
-primary
-    : primaryNoNewArray
-    | arrayCreationExpression
-    ;
-
-primaryNoNewArray
+primary[int i]
     : literal
     | typeName ( '[' ']' )? '.' 'class'
     | 'void' '.' 'class'
     | 'this'
     | typeName '.' 'this'
     | '(' expression ')'
-    | classInstanceCreationExpression
-    | fieldAccess
-    | arrayAccess
-    | methodInvocation
-    | methodReference
+    // | classInstanceCreationExpression
+    | 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+    | expressionName '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+    | primary '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+    // | fieldAccess
+    | typeName '.' 'super' '.' Identifier
+    | 'super' '.' Identifier
+    | primary '.' Identifier
+    // | arrayAccess
+    | expressionName '[' expression ']'
+    | primary '[' expression ']'
+    // | methodInvocation
+    // | methodReference
+    |  arrayCreationExpression
     ;
 
+// primaryNoNewArray
+// : literal
+// | typeName ( '[' ']' )? '.' 'class'
+// | 'void' '.' 'class'
+// | 'this'
+// | typeName '.' 'this'
+// | '(' expression ')'
+// | classInstanceCreationExpression
+// | fieldAccess
+// | arrayAccess
+// | methodInvocation
+// | methodReference
+// ;
 classInstanceCreationExpression
     : 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
     | expressionName '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
